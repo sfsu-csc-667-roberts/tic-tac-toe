@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Site Landing Page
+
+  ul
+    li
+      a(href="/users/login") Login Page
+    li
+      a(href="/users/register") Registration Page
+    li
+      a(href="/lobby") Lobby page
+    li
+      a(href="/games/42") Game page (with ID 42)
+
