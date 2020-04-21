@@ -2,3 +2,16 @@ extends layout
 
 block content
   p This is the unauthenticated login page
+
+  ul
+    each error in message
+      li= error
+
+  form(method="post" action="/users/login")
+    label(for="email") Email:
+    input#email(type="text", name="username")
+
+    label(for="password") Password:
+    input#password(type="password", name="password")
+
+    input(type="submit")
