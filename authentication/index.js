@@ -1,15 +1,28 @@
 const passport = require('passport')
 const Strategy = require('passport-local').Strategy
+const bcrypt = require('bcrypt');
 
 const db = require('../db')
 
 const findUserCallback = (email, password, callback) => {
-  db.Users.findByEmailAndPassword(email, password)
+  db.Users.findPasswordByEmail(email)
+    .then(({ password: hashedPassword }) => Promise.all([
+      bcrypt.compare(password, hashedPassword),
+      hashedPassword
+    ]))
+    .then(([result, hashedPassword]) => {
+      if (result) {
+        return Promise.resolve(hashedPassword);
+      } else {
+        return Promise.reject('Credentials invalid.')
+      }
+    })
+    .then(validatedPassword => db.Users.findByEmailAndPassword(email, validatedPassword))
     .then(user => {
       return callback(null, user)
     })
-    .catch(_ => {
-      return callback(null, false, "Email or password not found.")
+    .catch(error => {
+      return callback(null, false, error)
     })
 }
 
