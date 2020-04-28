@@ -10,6 +10,7 @@
     "db:rollback": "npx sequelize db:migrate:undo"
   },
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
