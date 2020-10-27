@@ -13,3 +13,8 @@ block content
     li
       a(href="/games/42") Game page (with ID 42)
 
+  div= error.message
+
+  ul
+    each entry in users
+      li= entry.email

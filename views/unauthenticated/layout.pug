@@ -3,7 +3,10 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="/socket.io/socket.io.js")
   body
     h1 This is an Unauthenticated page
 
     block content
+
+    script(src="/javascripts/messaging.js")
